@@ -56,7 +56,7 @@ public class Simulation {
             fork[i] = factory.createActor("fork");
         }
 
-        Channel[] ich = new Channel[30];
+        Channel[] ich = new Channel[29];
         for (int i = 0; i < ich.length; i++) {
             ich[i] = factory.createChannel();
         }
@@ -73,7 +73,8 @@ public class Simulation {
         input.connectIn(ich[8], 0);
         input.connectOut(ich[0], 0);
 
-        output.connectIn(ich[27], 0);
+        output.connectIn(ich[26], 0);
+        output.connectOut(ich[27], 0);
 
         zero1.connectIn(ich[3], 0);
         zero1.connectOut(ich[5], 0);
@@ -87,8 +88,8 @@ public class Simulation {
         zero4.connectIn(ich[17], 0);
         zero4.connectOut(ich[18], 0);
 
-        zero5.connectIn(ich[28], 0);
-        zero5.connectOut(ich[29], 0);
+        zero5.connectIn(ich[27], 0);
+        zero5.connectOut(ich[28], 0);
 
         switch1.connectIn(bch[1], 0);
         switch1.connectIn(ich[1], 1);
@@ -116,7 +117,7 @@ public class Simulation {
         switch5.connectOut(ich[24], 1);
 
         add1.connectIn(ich[7], 0);
-        add1.connectIn(ich[29], 1);
+        add1.connectIn(ich[28], 1);
         add1.connectOut(ich[0], 0);
 
         add2.connectIn(ich[18], 0);
@@ -179,10 +180,6 @@ public class Simulation {
         fork[9].connectIn(ich[23], 0);
         fork[9].connectOut(ich[24], 0);
         fork[9].connectOut(ich[26], 1);
-
-        fork[10].connectIn(ich[26], 0);
-        fork[10].connectOut(ich[27], 0);
-        fork[10].connectOut(ich[28], 1);
 
 
 
