@@ -1,13 +1,11 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Simulation {
-    static List<Actor> jobs = new LinkedList<>();
-    static ExecutorService es = Executors.newFixedThreadPool(1);
+    static Queue<Actor> jobs = new ConcurrentLinkedDeque<Actor>();
+    static ExecutorService es = Executors.newFixedThreadPool(4);
     static long startTime;
 
     static void start(Actor input) {
@@ -17,9 +15,17 @@ public class Simulation {
     }
 
     static void work() {
-        System.out.println("jobs.size: " + jobs.size());
-        while (!jobs.isEmpty()) {
-            es.execute((AbstractActor) jobs.remove(0));
+//        System.out.println("jobs.size: " + jobs.size());
+        while (true) {
+            Actor a = null;
+            try {
+                a = jobs.remove();
+            } catch (Exception e) {
+                // pass
+            }
+            if (a != null) {
+                es.execute((AbstractActor) a);
+            }
         }
     }
 
@@ -93,15 +99,28 @@ public class Simulation {
         c1.connectIn(m, 0);
         c1.connectOut(f, 0);
 
-        out.connectIn(l, 0);
+        Channel r = factory.createChannel();
+        Channel s = factory.createChannel();
 
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            int data = Integer.parseInt(sc.nextLine());
-            Actor input = new Input(data);
-            input.connectOut(a, 0);
-            start(input);
-        }
+        Actor fork4 = factory.createActor("fork");
+        fork4.connectIn(l, 0);
+        fork4.connectOut(r, 0);
+        fork4.connectOut(s, 1);
+
+        out.connectIn(r, 0);
+//
+//        Scanner sc = new Scanner(System.in);
+//        while (true) {
+//            Actor input = new Input(System.in);
+//            input.connectOut(a, 0);
+//            start(input);
+//        }
+        s.set(0);
+        Actor input = new Input(System.in);
+        input.connectIn(s, 0);
+        input.connectOut(a, 0);
+        start(input);
+
 
 
     }
