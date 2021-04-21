@@ -15,6 +15,10 @@ public class Factory {
                 return new Merge();
             case "switch":
                 return new Switch();
+            case "input":
+                return new Input(System.in);
+            case "output":
+                return new Output();
             case "<":
                 return new LessThan();
             case ">":
