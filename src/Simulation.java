@@ -1,11 +1,26 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Simulation {
+    static List<Actor> jobs = new LinkedList<>();
+    static ExecutorService es = Executors.newFixedThreadPool(1);
+    static long startTime;
 
     static void start(Actor input) {
-        input.fire();
+        jobs.add(input);
+        startTime = System.currentTimeMillis();
+        work();
+    }
 
+    static void work() {
+        System.out.println("jobs.size: " + jobs.size());
+        while (!jobs.isEmpty()) {
+            es.execute((AbstractActor) jobs.remove(0));
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -80,10 +95,13 @@ public class Simulation {
 
         out.connectIn(l, 0);
 
-        Actor input = new Input();
-        input.connectOut(a, 0);
-
-        start(input);
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            int data = Integer.parseInt(sc.nextLine());
+            Actor input = new Input(data);
+            input.connectOut(a, 0);
+            start(input);
+        }
 
 
     }

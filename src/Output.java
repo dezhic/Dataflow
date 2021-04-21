@@ -6,7 +6,9 @@ public class Output extends AbstractActor {
 
     public boolean fire() {
         if (channelsIn[0].isEmpty()) { return false; }
-        System.out.println(channelsIn[0].receive());
+        int data = channelsIn[0].receive();
+        long elapsed = System.currentTimeMillis() - Simulation.startTime;
+        System.out.println(data + " (" + elapsed + ")");
         return true;
     }
 }

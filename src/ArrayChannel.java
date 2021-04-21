@@ -47,6 +47,10 @@ public class ArrayChannel implements Channel {
         }
         buffer[end] = data;
         end = (end + 1) % buffer.length;
+        Simulation.jobs.add(dest);
+        System.out.println("job added: " + dest);
+        Simulation.work();
+        // TODO added dest not seeing the changed `end`?
     }
 
     /* receive is not synchronized because there's only
