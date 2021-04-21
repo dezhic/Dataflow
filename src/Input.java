@@ -1,17 +1,10 @@
 import java.util.Scanner;
 
-public class Input implements Actor {
-    Channel[] channelsIn = new Channel[1];
-    Channel[] channelsOut = new Channel[1];
-    Scanner sc = new Scanner(System.in);
-    @Override
-    public void connectIn(Channel c, int i) {
-        channelsIn[i] = c;
-    }
+public class Input extends AbstractActor {
+    Scanner sc;
 
-    @Override
-    public void connectOut(Channel c, int i) {
-        channelsOut[i] = c;
+    public Input() {
+        super.channelsOut = new Channel[1];
     }
 
     public boolean fire() {

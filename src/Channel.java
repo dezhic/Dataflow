@@ -4,4 +4,5 @@ public interface Channel {
     int receive();
     boolean isEmpty();
     int peek();
+    void setDest(Actor dest);
 }

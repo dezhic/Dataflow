@@ -1,15 +1,7 @@
-public class Dec implements Actor {
-    Channel[] channelsIn = new Channel[1];
-    Channel[] channelsOut = new Channel[1];
-
-    @Override
-    public void connectIn(Channel c, int i) {
-        channelsIn[i] = c;
-    }
-
-    @Override
-    public void connectOut(Channel c, int i) {
-        channelsOut[i] = c;
+public class Dec extends AbstractActor {
+    public Dec() {
+        super.channelsIn = new Channel[1];
+        super.channelsOut = new Channel[1];
     }
 
     public boolean fire() {

@@ -1,19 +1,10 @@
-public class Const implements Actor {
-    Channel[] channelsIn = new Channel[1];
-    Channel[] channelsOut = new Channel[1];
+public class Const extends AbstractActor {
     int value;
 
     public Const(int value) {
+        super.channelsIn = new Channel[1];
+        super.channelsOut = new Channel[1];
         this.value = value;
-    }
-    @Override
-    public void connectIn(Channel c, int i) {
-        channelsIn[i] = c;
-    }
-
-    @Override
-    public void connectOut(Channel c, int i) {
-        channelsOut[i] = c;
     }
 
     public boolean fire() {

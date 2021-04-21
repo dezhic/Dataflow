@@ -1,14 +1,7 @@
-public class Switch implements Actor {
-    Channel[] channelsIn = new Channel[2];
-    Channel[] channelsOut = new Channel[2];
-    @Override
-    public void connectIn(Channel c, int i) {
-        channelsIn[i] = c;
-    }
-
-    @Override
-    public void connectOut(Channel c, int i) {
-        channelsOut[i] = c;
+public class Switch extends AbstractActor {
+    public Switch() {
+        super.channelsIn = new Channel[2];
+        super.channelsOut = new Channel[2];
     }
 
     public boolean fire() {

@@ -1,14 +1,7 @@
-public class Fork implements Actor {
-    Channel[] channelsIn = new Channel[1];
-    Channel[] channelsOut = new Channel[2];
-    @Override
-    public void connectIn(Channel c, int i) {
-        channelsIn[i] = c;
-    }
-
-    @Override
-    public void connectOut(Channel c, int i) {
-        channelsOut[i] = c;
+public class Fork extends AbstractActor {
+    public Fork() {
+        super.channelsIn = new Channel[1];
+        super.channelsOut = new Channel[2];
     }
 
     public boolean fire() {

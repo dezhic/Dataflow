@@ -5,6 +5,7 @@ public class ArrayChannel implements Channel {
     volatile int beg = 0;
     volatile int end = beg;
     final int DEFAULT_BOUND = 8;
+    Actor dest;
 
     public ArrayChannel() {
         buffer = new int[DEFAULT_BOUND];
@@ -59,5 +60,8 @@ public class ArrayChannel implements Channel {
     }
     public int peek() {
         return buffer[beg];
+    }
+    public void setDest(Actor dest) {
+        this.dest = dest;
     }
 }
