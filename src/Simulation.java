@@ -51,6 +51,10 @@ public class Simulation {
         Actor inc2 = factory.createActor("inc");
         Actor dec1 = factory.createActor("dec");
         Actor lt1 = factory.createActor("<");
+        Actor[] fork = new Actor[11];
+        for (int i = 0; i < fork.length; i++) {
+            fork[i] = factory.createActor("fork");
+        }
 
         Channel[] ich = new Channel[30];
         for (int i = 0; i < ich.length; i++) {
@@ -131,7 +135,49 @@ public class Simulation {
         lt1.connectIn(ich[4], 1);
         lt1.connectOut(bch[0], 0);
 
+        fork[0].connectIn(ich[0], 0);
+        fork[0].connectOut(ich[1], 0);
+        fork[0].connectOut(ich[2], 1);
 
+        fork[1].connectIn(ich[2], 0);
+        fork[1].connectOut(ich[3], 0);
+        fork[1].connectOut(ich[4], 1);
+
+        fork[2].connectIn(bch[0], 0);
+        fork[2].connectOut(bch[1], 0);
+        fork[2].connectOut(bch[2], 1);
+
+        fork[3].connectIn(bch[2], 0);
+        fork[3].connectOut(bch[3], 0);
+        fork[3].connectOut(bch[4], 1);
+
+        fork[4].connectIn(bch[4], 0);
+        fork[4].connectOut(bch[5], 0);
+        fork[4].connectOut(bch[6], 1);
+
+        fork[5].connectIn(bch[6], 0);
+        fork[5].connectOut(bch[7], 0);
+        fork[5].connectOut(bch[8], 1);
+
+        fork[6].connectIn(ich[11], 0);
+        fork[6].connectOut(ich[14], 0);
+        fork[6].connectOut(ich[15], 1);
+
+        fork[7].connectIn(ich[12], 0);
+        fork[7].connectOut(ich[13], 0);
+        fork[7].connectOut(ich[15], 1);
+
+        fork[8].connectIn(ich[15], 0);
+        fork[8].connectOut(ich[16], 0);
+        fork[8].connectOut(ich[19], 1);
+
+        fork[9].connectIn(ich[23], 0);
+        fork[9].connectOut(ich[24], 0);
+        fork[9].connectOut(ich[26], 1);
+
+        fork[10].connectIn(ich[26], 0);
+        fork[10].connectOut(ich[27], 0);
+        fork[10].connectOut(ich[28], 1);
 
 
 
