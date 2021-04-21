@@ -11,9 +11,11 @@ public class Fork implements Actor {
         channelsOut[i] = c;
     }
 
-    public void fire() {
+    public boolean fire() {
+        if (channelsIn[0].isEmpty()) { return false; }
         int token = channelsIn[0].receive();
         channelsOut[0].send(token);
         channelsOut[1].send(token);
+        return true;
     }
 }

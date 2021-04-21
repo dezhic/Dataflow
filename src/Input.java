@@ -1,11 +1,9 @@
-public class Const implements Actor {
+import java.util.Scanner;
+
+public class Input implements Actor {
     Channel[] channelsIn = new Channel[1];
     Channel[] channelsOut = new Channel[1];
-    int value;
-
-    public Const(int value) {
-        this.value = value;
-    }
+    Scanner sc = new Scanner(System.in);
     @Override
     public void connectIn(Channel c, int i) {
         channelsIn[i] = c;
@@ -17,9 +15,8 @@ public class Const implements Actor {
     }
 
     public boolean fire() {
-        if (channelsIn[0].isEmpty()) { return false; }
-        channelsIn[0].receive();
-        channelsOut[0].send(value);
+        int data = Integer.parseInt(sc.nextLine());
+        channelsOut[0].send(data);
         return true;
     }
 }

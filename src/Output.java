@@ -1,11 +1,7 @@
-public class Const implements Actor {
+public class Output implements Actor {
     Channel[] channelsIn = new Channel[1];
     Channel[] channelsOut = new Channel[1];
-    int value;
 
-    public Const(int value) {
-        this.value = value;
-    }
     @Override
     public void connectIn(Channel c, int i) {
         channelsIn[i] = c;
@@ -18,8 +14,7 @@ public class Const implements Actor {
 
     public boolean fire() {
         if (channelsIn[0].isEmpty()) { return false; }
-        channelsIn[0].receive();
-        channelsOut[0].send(value);
+        System.out.println(channelsIn[0].receive());
         return true;
     }
 }

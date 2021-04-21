@@ -11,7 +11,12 @@ public class Merge implements Actor {
         channelsOut[i] = c;
     }
 
-    public void fire() {
+    public boolean fire() {
+        if ((channelsIn[0].isEmpty()) ||
+                (channelsIn[0].peek() == 0 && channelsIn[2].isEmpty()) ||
+                (channelsIn[0].peek() != 0 && channelsIn[1].isEmpty())) {
+            return false;
+        }
         if (channelsIn[0].receive() == 0) {
             // false
             channelsOut[0].send(channelsIn[2].receive());
@@ -19,6 +24,6 @@ public class Merge implements Actor {
             // true
             channelsOut[0].send(channelsIn[1].receive());
         }
-
+        return true;
     }
 }

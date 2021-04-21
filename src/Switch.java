@@ -11,7 +11,10 @@ public class Switch implements Actor {
         channelsOut[i] = c;
     }
 
-    public void fire() {
+    public boolean fire() {
+        if (channelsIn[0].isEmpty() || channelsIn[1].isEmpty()) {
+            return false;
+        }
         if (channelsIn[0].receive() == 0) {
             // false
             channelsOut[1].send(channelsIn[1].receive());
@@ -19,5 +22,6 @@ public class Switch implements Actor {
             // true
             channelsOut[0].send(channelsIn[1].receive());
         }
+        return true;
     }
 }

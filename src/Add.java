@@ -12,7 +12,9 @@ public class Add implements Actor{
         channelsOut[i] = c;
     }
 
-    public void fire() {
+    public boolean fire() {
+        if (channelsIn[0].isEmpty()) { return false; }
         channelsOut[0].send(channelsIn[0].receive() + channelsIn[1].receive());
+        return true;
     }
 }

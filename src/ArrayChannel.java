@@ -57,4 +57,7 @@ public class ArrayChannel implements Channel {
         beg = (beg + 1) % buffer.length;
         return buffer[idx];
     }
+    public int peek() {
+        return buffer[beg];
+    }
 }
