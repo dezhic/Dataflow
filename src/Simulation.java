@@ -65,6 +65,11 @@ public class Simulation {
             bch[i] = factory.createChannel();
         }
 
+        ich[8].set(0);
+        ich[14].set(0);
+        ich[18].set(0);
+        ich[21].set(0);
+
         input.connectIn(ich[8], 0);
         input.connectOut(ich[0], 0);
 
