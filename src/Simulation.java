@@ -16,7 +16,7 @@ public class Simulation {
 
     static void work() {
 //        System.out.println("jobs.size: " + jobs.size());
-        while (true) {
+        while (!jobs.isEmpty()) {
             Actor a = null;
             try {
                 a = jobs.remove();
