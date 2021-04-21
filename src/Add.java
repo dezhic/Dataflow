@@ -5,7 +5,7 @@ public class Add extends AbstractActor {
     }
 
     public boolean fire() {
-        if (channelsIn[0].isEmpty()) { return false; }
+        if (channelsIn[0].isEmpty() || channelsIn[1].isEmpty()) { return false; }
         channelsOut[0].send(channelsIn[0].receive() + channelsIn[1].receive());
         return true;
     }
