@@ -6,7 +6,7 @@ public class Factory {
             case "dec":
                 return new Dec();
             case "cdr":
-                return null; // TODO
+                return new Cdr();
             case "fork":
                 return new Fork();
             case "inc":
@@ -15,6 +15,12 @@ public class Factory {
                 return new Merge();
             case "switch":
                 return new Switch();
+            case "<":
+                return new LessThan();
+            case ">":
+                return new GreaterThan();
+            case "==":
+                return new EqualTo();
             default:
                 try {
                     int c = Integer.parseInt(actor);
