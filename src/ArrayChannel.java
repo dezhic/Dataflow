@@ -19,14 +19,7 @@ public class ArrayChannel implements Channel {
         end = (end + 1) % buffer.length;
     }
 
-    /*
-        synchronization not needed because:
-            1. only the receiver can cause a non-empty buffer to be empty;
-            2. only the receiver is checking isEmpty;
-            3. it doesn't matter if the receiver sees staled `end`, as
-                it will eventually see the change when spinning.
-     */
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return beg == end;
     }
 
