@@ -6,19 +6,12 @@ public class ArrayChannel implements Channel {
     volatile int end = beg;
     final int DEFAULT_BOUND = 8;
     Actor dest;
-    int id;
-    char type;
 
     public ArrayChannel() {
         buffer = new int[DEFAULT_BOUND];
     }
-//    public ArrayChannel(int bound) {
-//        buffer = new int[bound];
-//    }
-    public ArrayChannel(int id, char type) {
-        this();
-        this.id = id;
-        this.type = type;
+    public ArrayChannel(int bound) {
+        buffer = new int[bound];
     }
     @Override
     public void set(int i) {

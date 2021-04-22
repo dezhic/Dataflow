@@ -69,19 +69,16 @@ public class Simulation {
         Actor lt1 = factory.createActor("<");
         Actor[] fork = new Actor[11];
         for (int i = 0; i < fork.length; i++) {
-//            fork[i] = factory.createActor("fork");
-            fork[i] = new Fork(i);
+            fork[i] = factory.createActor("fork");
         }
 
         Channel[] ich = new Channel[29];
         for (int i = 0; i < ich.length; i++) {
-//            ich[i] = factory.createChannel();
-            ich[i] = new ArrayChannel(i, 'i');
+            ich[i] = factory.createChannel();
         }
         Channel[] bch = new Channel[9];
         for (int i = 0; i < bch.length; i++) {
-//            bch[i] = factory.createChannel();
-            bch[i] = new ArrayChannel(i, 'b');
+            bch[i] = factory.createChannel();
         }
 
         ich[8].set(0);
