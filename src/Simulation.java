@@ -198,6 +198,70 @@ public class Simulation {
         lt0.connectIn(ich[7], 1);
         lt0.connectOut(bch[0], 0);
 
+        fork[0].connectIn(ich[3], 0);
+        fork[0].connectOut(ich[4], 0);
+        fork[0].connectOut(ich[5], 1);
+
+        fork[1].connectIn(ich[5], 0);
+        fork[1].connectOut(ich[6], 0);
+        fork[1].connectOut(ich[7], 1);
+
+        fork[2].connectIn(bch[0], 0);
+        fork[2].connectOut(bch[1], 0);
+        fork[2].connectOut(bch[2], 1);
+
+        fork[3].connectIn(bch[2], 0);
+        fork[3].connectOut(bch[6], 0);
+        fork[3].connectOut(bch[7], 1);
+
+        fork[4].connectIn(bch[6], 0);
+        fork[4].connectOut(bch[5], 0);
+        fork[4].connectOut(bch[15], 1);
+
+        fork[5].connectIn(bch[5], 0);
+        fork[5].connectOut(bch[4], 0);
+        fork[5].connectOut(bch[14], 1);
+
+        fork[6].connectIn(bch[4], 0);
+        fork[6].connectOut(bch[3], 0);
+        fork[6].connectOut(bch[13], 1);
+
+        fork[7].connectIn(bch[3], 0);
+        fork[7].connectOut(bch[11], 0);
+        fork[7].connectOut(bch[12], 1);
+
+        fork[8].connectIn(bch[7], 0);
+        fork[8].connectOut(bch[8], 0);
+        fork[8].connectOut(bch[16], 1);
+
+        fork[9].connectIn(bch[8], 0);
+        fork[9].connectOut(bch[9], 0);
+        fork[9].connectOut(bch[17], 1);
+
+        fork[10].connectIn(bch[9], 0);
+        fork[10].connectOut(bch[10], 0);
+        fork[10].connectOut(bch[18], 1);
+
+        fork[11].connectIn(bch[10], 0);
+        fork[11].connectOut(bch[19], 0);
+        fork[11].connectOut(bch[20], 1);
+
+        fork[12].connectIn(ich[30], 0);
+        fork[12].connectOut(ich[33], 0);
+        fork[12].connectOut(ich[32], 1);
+
+        fork[13].connectIn(ich[20], 0);
+        fork[13].connectOut(ich[21], 0);
+        fork[13].connectOut(ich[22], 1);
+
+        fork[14].connectIn(ich[14], 0);
+        fork[14].connectOut(ich[40], 0);
+        fork[14].connectOut(ich[16], 1);
+
+        fork[15].connectIn(ich[15], 0);
+        fork[15].connectOut(ich[17], 0);
+        fork[15].connectOut(ich[18], 1);
+
         start(input);
     }
 }
