@@ -1,10 +1,10 @@
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Simulation {
-    static Queue<Actor> jobs = new ConcurrentLinkedDeque<Actor>();
+    static Queue<Actor> jobs = new ConcurrentLinkedQueue<>();
     static ExecutorService es;
     static long startTime;
 
