@@ -48,6 +48,7 @@ public class Simulation {
 
         Factory factory = new Factory();
 
+        // Create Actors
         Actor input = factory.createActor("input");
         Actor output = factory.createActor("output");
         Actor zero1 = factory.createActor("0");
@@ -72,6 +73,7 @@ public class Simulation {
             fork[i] = factory.createActor("fork");
         }
 
+        // Create Channels
         Channel[] ich = new Channel[29];
         for (int i = 0; i < ich.length; i++) {
             ich[i] = factory.createChannel();
@@ -81,124 +83,9 @@ public class Simulation {
             bch[i] = factory.createChannel();
         }
 
-        ich[8].set(0);
-        ich[14].set(0);
-        ich[18].set(0);
-        ich[21].set(0);
+        // Initialize Channels
 
-        input.connectIn(ich[8], 0);
-        input.connectOut(ich[0], 0);
-
-        output.connectIn(ich[26], 0);
-        output.connectOut(ich[27], 0);
-
-        zero1.connectIn(ich[3], 0);
-        zero1.connectOut(ich[5], 0);
-
-        zero2.connectIn(ich[13], 0);
-        zero2.connectOut(ich[14], 0);
-
-        zero3.connectIn(ich[25], 0);
-        zero3.connectOut(ich[21], 0);
-
-        zero4.connectIn(ich[17], 0);
-        zero4.connectOut(ich[18], 0);
-
-        zero5.connectIn(ich[27], 0);
-        zero5.connectOut(ich[28], 0);
-
-        switch1.connectIn(bch[1], 0);
-        switch1.connectIn(ich[1], 1);
-        switch1.connectOut(ich[6], 0);
-        switch1.connectOut(ich[8], 1);
-
-        switch2.connectIn(bch[3], 0);
-        switch2.connectIn(ich[14], 1);
-        switch2.connectOut(ich[9], 0);
-        switch2.connectOut(ich[10], 1);
-
-        switch3.connectIn(bch[5], 0);
-        switch3.connectIn(ich[16], 1);
-        switch3.connectOut(ich[18], 0);
-        switch3.connectOut(ich[17], 1);
-
-        switch4.connectIn(bch[7], 0);
-        switch4.connectIn(ich[24], 1);
-        switch4.connectOut(ich[21], 0);
-        switch4.connectOut(ich[25], 1);
-
-        switch5.connectIn(bch[8], 0);
-        switch5.connectIn(ich[22], 1);
-        switch5.connectOut(ich[23], 0);
-        switch5.connectOut(ich[24], 1);
-
-        add1.connectIn(ich[7], 0);
-        add1.connectIn(ich[28], 1);
-        add1.connectOut(ich[0], 0);
-
-        add2.connectIn(ich[18], 0);
-        add2.connectIn(ich[19], 1);
-        add2.connectOut(ich[20], 0);
-
-        add3.connectIn(ich[20], 0);
-        add3.connectIn(ich[21], 1);
-        add3.connectOut(ich[22], 0);
-
-        inc1.connectIn(ich[9], 0);
-        inc1.connectOut(ich[11], 0);
-
-        inc2.connectIn(ich[10], 0);
-        inc2.connectOut(ich[12], 0);
-
-        dec1.connectIn(ich[6], 0);
-        dec1.connectOut(ich[7], 0);
-
-        lt1.connectIn(ich[5], 0);
-        lt1.connectIn(ich[4], 1);
-        lt1.connectOut(bch[0], 0);
-
-        fork[0].connectIn(ich[0], 0);
-        fork[0].connectOut(ich[1], 0);
-        fork[0].connectOut(ich[2], 1);
-
-        fork[1].connectIn(ich[2], 0);
-        fork[1].connectOut(ich[3], 0);
-        fork[1].connectOut(ich[4], 1);
-
-        fork[2].connectIn(bch[0], 0);
-        fork[2].connectOut(bch[1], 0);
-        fork[2].connectOut(bch[2], 1);
-
-        fork[3].connectIn(bch[2], 0);
-        fork[3].connectOut(bch[3], 0);
-        fork[3].connectOut(bch[4], 1);
-
-        fork[4].connectIn(bch[4], 0);
-        fork[4].connectOut(bch[5], 0);
-        fork[4].connectOut(bch[6], 1);
-
-        fork[5].connectIn(bch[6], 0);
-        fork[5].connectOut(bch[7], 0);
-        fork[5].connectOut(bch[8], 1);
-
-        fork[6].connectIn(ich[11], 0);
-        fork[6].connectOut(ich[14], 0);
-        fork[6].connectOut(ich[15], 1);
-
-        fork[7].connectIn(ich[12], 0);
-        fork[7].connectOut(ich[13], 0);
-        fork[7].connectOut(ich[15], 1);
-
-        fork[8].connectIn(ich[15], 0);
-        fork[8].connectOut(ich[16], 0);
-        fork[8].connectOut(ich[19], 1);
-
-        fork[9].connectIn(ich[23], 0);
-        fork[9].connectOut(ich[24], 0);
-        fork[9].connectOut(ich[26], 1);
-
-
-
+        // Connect Actors with Channels
 
 
         start(input);
