@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 
 public class Simulation {
     static Queue<Actor> jobs = new ConcurrentLinkedDeque<Actor>();
-    static ExecutorService es = Executors.newFixedThreadPool(4);
+    static ExecutorService es;
     static long startTime;
 
     static void start(Actor input) {
@@ -30,6 +30,22 @@ public class Simulation {
     }
 
     public static void main(String[] args) throws Exception {
+        if (args.length == 0) {
+            es = Executors.newFixedThreadPool(1);
+        } else if (args.length == 1){
+            int t = 1;
+            try {
+                t = Integer.parseInt(args[0]);
+                es = Executors.newFixedThreadPool(t);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid arguments");
+                System.exit(1);
+            }
+        } else {
+            System.out.println("Invalid arguments");
+            System.exit(1);
+        }
+
         Factory factory = new Factory();
 
         Actor input = factory.createActor("input");
@@ -53,16 +69,19 @@ public class Simulation {
         Actor lt1 = factory.createActor("<");
         Actor[] fork = new Actor[11];
         for (int i = 0; i < fork.length; i++) {
-            fork[i] = factory.createActor("fork");
+//            fork[i] = factory.createActor("fork");
+            fork[i] = new Fork(i);
         }
 
         Channel[] ich = new Channel[29];
         for (int i = 0; i < ich.length; i++) {
-            ich[i] = factory.createChannel();
+//            ich[i] = factory.createChannel();
+            ich[i] = new ArrayChannel(i, 'i');
         }
         Channel[] bch = new Channel[9];
         for (int i = 0; i < bch.length; i++) {
-            bch[i] = factory.createChannel();
+//            bch[i] = factory.createChannel();
+            bch[i] = new ArrayChannel(i, 'b');
         }
 
         ich[8].set(0);

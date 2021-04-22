@@ -6,12 +6,19 @@ public class ArrayChannel implements Channel {
     volatile int end = beg;
     final int DEFAULT_BOUND = 8;
     Actor dest;
+    int id;
+    char type;
 
     public ArrayChannel() {
         buffer = new int[DEFAULT_BOUND];
     }
-    public ArrayChannel(int bound) {
-        buffer = new int[bound];
+//    public ArrayChannel(int bound) {
+//        buffer = new int[bound];
+//    }
+    public ArrayChannel(int id, char type) {
+        this();
+        this.id = id;
+        this.type = type;
     }
     @Override
     public void set(int i) {
@@ -48,16 +55,21 @@ public class ArrayChannel implements Channel {
         buffer[end] = data;
         end = (end + 1) % buffer.length;
         Simulation.jobs.add(dest);
-        System.out.println("job added: " + dest);
+        notify();
         Simulation.work();
-        // TODO added dest not seeing the changed `end`?
     }
 
     /* receive is not synchronized because there's only
         one receiver (that modifies `beg`) */
-    public int receive() {
+    /* NO!!!! There can be multiple THREADS executing the same actor!!! */
+    public synchronized int receive() {
         while (isEmpty()) {
-        };  // Spin
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                System.exit(1);
+            }
+        }
         int idx = beg;
         beg = (beg + 1) % buffer.length;
         return buffer[idx];

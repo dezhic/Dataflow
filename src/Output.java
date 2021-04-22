@@ -8,7 +8,7 @@ public class Output extends AbstractActor {
         if (channelsIn[0].isEmpty()) { return false; }
         int data = channelsIn[0].receive();
         long elapsed = System.currentTimeMillis() - Simulation.startTime;
-        System.out.println(data + " (" + elapsed + ")");
+        System.out.println(data);
         channelsOut[0].send(data);
         return true;
     }
