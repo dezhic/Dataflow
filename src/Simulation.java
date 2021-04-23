@@ -61,6 +61,7 @@ public class Simulation {
 
         Factory factory = new Factory();
 
+        // Network construction START
         // Create Actors
         Actor input = factory.createActor("input");
         Actor output = factory.createActor("output");
@@ -275,6 +276,72 @@ public class Simulation {
         fork[15].connectOut(ich[17], 0);
         fork[15].connectOut(ich[18], 1);
 
+        // Network construction END
+
+        /*
+            The following code constructs a highly parallel network.
+            It can demonstrate the multi-threading speedup of this Dataflow Simulator.
+            See the report for more details.
+         */
+        /*
+        // A highly parallel network START
+        final int p = 20;
+        int nAdd = (int) Math.pow(2, p) - 1;
+        int nFork = (int) Math.pow(2, p) - 1;
+        int nCh = (int) Math.pow(2, p+1) - 1;
+
+
+        Actor[] add = new Actor[nAdd];
+        for (int i = 0; i < add.length; i++) {
+            add[i] = factory.createActor("add");
+        }
+
+        Actor[] fork = new Actor[nFork];
+        for (int i = 0; i < fork.length; i++) {
+            fork[i] = factory.createActor("fork");
+        }
+
+        Channel[] chAdd = new Channel[nCh];
+        for (int i = 0; i < chAdd.length; i++) {
+            chAdd[i] = factory.createChannel();
+        }
+
+        Channel[] chFork = new Channel[nCh];
+        for (int i = 0; i < (int) Math.pow(2, p) - 1; i++) {
+            chFork[i] = factory.createChannel();
+        }
+        for (int i = (int) Math.pow(2, p) - 1; i < nCh; i++) {
+            chFork[i] = chAdd[i];
+        }
+
+        Actor input = factory.createActor("input");
+        Actor output = factory.createActor("output");
+
+        // Connect
+        for (int i = 0; i < add.length; i++) {
+            add[i].connectIn(chAdd[2 * i + 1], 0);
+            add[i].connectIn(chAdd[2 * i + 2], 1);
+            add[i].connectOut(chAdd[i], 0);
+        }
+        for (int i = 0; i < fork.length; i++) {
+            fork[i].connectOut(chFork[2 * i + 1], 0);
+            fork[i].connectOut(chFork[2 * i + 2], 1);
+            fork[i].connectIn(chFork[i], 0);
+        }
+
+
+        Channel trigger = factory.createChannel();
+        trigger.set(0);
+        input.connectIn(trigger, 0);
+        input.connectOut(chFork[0], 0);
+
+        output.connectIn(chAdd[0], 0);
+        output.connectOut(trigger, 0);
+
+        // A highly parallel network END
+        */
+
+        // Start the simulation
         start(t);
     }
 }
