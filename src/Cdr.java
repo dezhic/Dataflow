@@ -1,6 +1,7 @@
 public class Cdr extends AbstractActor {
     boolean fired = false;
     public Cdr() {
+        super();
         super.channelsIn = new Channel[1];
         super.channelsOut = new Channel[1];
     }

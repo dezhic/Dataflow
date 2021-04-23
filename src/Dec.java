@@ -1,5 +1,6 @@
 public class Dec extends AbstractActor {
     public Dec() {
+        super();
         super.channelsIn = new Channel[1];
         super.channelsOut = new Channel[1];
     }

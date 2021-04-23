@@ -1,5 +1,6 @@
 public class Fork extends AbstractActor {
     public Fork() {
+        super();
         super.channelsIn = new Channel[1];
         super.channelsOut = new Channel[2];
     }

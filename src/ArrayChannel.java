@@ -40,9 +40,7 @@ public class ArrayChannel implements Channel {
         }
         buffer[end] = data;
         end = (end + 1) % buffer.length;
-        Simulation.jobs.add(dest);
         notify();
-        Simulation.work();
     }
 
     /* receive is not synchronized because there's only

@@ -1,5 +1,6 @@
 public class EqualTo extends AbstractActor {
     public EqualTo() {
+        super();
         super.channelsIn = new Channel[2];
         super.channelsOut = new Channel[1];
     }

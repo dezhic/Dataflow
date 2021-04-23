@@ -1,5 +1,6 @@
 public class Inc extends AbstractActor {
     public Inc() {
+        super();
         super.channelsIn = new Channel[1];
         super.channelsOut = new Channel[1];
     }

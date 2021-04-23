@@ -4,39 +4,50 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Simulation {
-    static Queue<Actor> jobs = new ConcurrentLinkedQueue<>();
-    static ExecutorService es;
-    static long startTime;
+//    static Queue<Actor> jobs = new ConcurrentLinkedQueue<>();
+    static List<Actor> actors = new ArrayList<>();
+//    static ExecutorService es;
 
-    static void start(Actor input) {
-        jobs.add(input);
-        startTime = System.currentTimeMillis();
-        work();
+    static void start(int t) {
+       int n = actors.size();
+       int q = n / t;
+       int r = n % t;
+       Thread[] threads = new Thread[t];
+       for (int i = 0; i < r; i++) {
+           threads[i] = new Thread(new Work(i * (q + 1), (i + 1) * (q + 1)));
+       }
+       for (int i = r; i < t; i++) {
+           threads[i] = new Thread(new Work(q * i + r, q * (i + 1) + r));
+       }
+       for (Thread thr : threads) {
+           thr.start();
+       }
+
     }
 
-    static void work() {
-//        System.out.println("jobs.size: " + jobs.size());
-        while (!jobs.isEmpty()) {
-            Actor a = null;
-            try {
-                a = jobs.remove();
-            } catch (Exception e) {
-                // pass
-            }
-            if (a != null) {
-                es.execute((AbstractActor) a);
+    static class Work implements Runnable {
+        int beg;
+        int end;
+        public Work(int beg, int end) {
+            this.beg = beg;
+            this.end = end;
+        }
+        public void run() {
+            while (true) {
+                for (int i = beg; i < end; i++) {
+                    actors.get(i).fire();
+                }
             }
         }
     }
 
     public static void main(String[] args) throws Exception {
+        int t = 1;
         if (args.length == 0) {
-            es = Executors.newFixedThreadPool(1);
+            t = 1;
         } else if (args.length == 1){
-            int t = 1;
             try {
                 t = Integer.parseInt(args[0]);
-                es = Executors.newFixedThreadPool(t);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid arguments");
                 System.exit(1);
@@ -262,6 +273,6 @@ public class Simulation {
         fork[15].connectOut(ich[17], 0);
         fork[15].connectOut(ich[18], 1);
 
-        start(input);
+        start(t);
     }
 }

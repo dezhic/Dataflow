@@ -1,5 +1,6 @@
 public class Add extends AbstractActor {
     public Add() {
+        super();
         super.channelsIn = new Channel[2];
         super.channelsOut = new Channel[1];
     }

@@ -1,5 +1,6 @@
 public class Switch extends AbstractActor {
     public Switch() {
+        super();
         super.channelsIn = new Channel[2];
         super.channelsOut = new Channel[2];
     }

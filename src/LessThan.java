@@ -1,5 +1,6 @@
 public class LessThan extends AbstractActor {
     public LessThan() {
+        super();
         super.channelsIn = new Channel[2];
         super.channelsOut = new Channel[1];
     }

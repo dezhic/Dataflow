@@ -1,5 +1,6 @@
 public class GreaterThan extends AbstractActor {
     public GreaterThan() {
+        super();
         super.channelsIn = new Channel[2];
         super.channelsOut = new Channel[1];
     }

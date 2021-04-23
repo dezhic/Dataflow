@@ -1,5 +1,6 @@
 public class Merge extends AbstractActor {
     public Merge() {
+        super();
         super.channelsIn = new Channel[3];
         super.channelsOut = new Channel[1];
     }

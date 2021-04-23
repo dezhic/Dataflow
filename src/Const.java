@@ -2,6 +2,7 @@ public class Const extends AbstractActor {
     int value;
 
     public Const(int value) {
+        super();
         super.channelsIn = new Channel[1];
         super.channelsOut = new Channel[1];
         this.value = value;

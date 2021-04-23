@@ -6,6 +6,7 @@ public class Input extends AbstractActor {
     InputStream inputStream;
     Scanner sc;
     public Input(InputStream in) {
+        super();
         this.inputStream = in;
         sc = new Scanner(inputStream);
         super.channelsIn = new Channel[1];
