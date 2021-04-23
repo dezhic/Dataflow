@@ -288,6 +288,7 @@ public class Simulation {
         fork[15].connectOut(ich[18], 1);
         // Network construction END
 
+        /** The code below provides another network. See the Report for details **/
         /*
         // A highly parallel network START
         final int p = 20;
