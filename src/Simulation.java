@@ -7,6 +7,7 @@ public class Simulation {
 //    static Queue<Actor> jobs = new ConcurrentLinkedQueue<>();
     static List<Actor> actors = new ArrayList<>();
 //    static ExecutorService es;
+    static long startTime;
 
     static void start(int t) {
        int n = actors.size();
@@ -19,6 +20,7 @@ public class Simulation {
        for (int i = r; i < t; i++) {
            threads[i] = new Thread(new Work(q * i + r, q * (i + 1) + r));
        }
+        startTime = System.currentTimeMillis();
        for (Thread thr : threads) {
            thr.start();
        }
