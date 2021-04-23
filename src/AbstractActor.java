@@ -9,7 +9,6 @@ public abstract class AbstractActor implements Actor, Runnable {
     @Override
     public void connectIn(Channel c, int i) {
         channelsIn[i] = c;
-        c.setDest(this);
     }
 
     @Override

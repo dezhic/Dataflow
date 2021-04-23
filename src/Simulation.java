@@ -1,15 +1,12 @@
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Simulation {
-//    static Queue<Actor> jobs = new ConcurrentLinkedQueue<>();
     static List<Actor> actors = new ArrayList<>();
-//    static ExecutorService es;
     static long startTime;
 
     static void start(int t) {
+        // Work distribution
        int n = actors.size();
        int q = n / t;
        int r = n % t;
@@ -20,7 +17,8 @@ public class Simulation {
        for (int i = r; i < t; i++) {
            threads[i] = new Thread(new Work(q * i + r, q * (i + 1) + r));
        }
-        startTime = System.currentTimeMillis();
+       // Start threads
+       startTime = System.currentTimeMillis();
        for (Thread thr : threads) {
            thr.start();
        }
@@ -43,6 +41,11 @@ public class Simulation {
         }
     }
 
+    private static void printUsage() {
+        System.out.println("Usage:\n\tjava Simulation [<t>]\n" +
+                "Parameters:\n\tt\tnumber of threads");
+    }
+
     public static void main(String[] args) throws Exception {
         int t = 1;
         if (args.length == 0) {
@@ -50,12 +53,20 @@ public class Simulation {
         } else if (args.length == 1){
             try {
                 t = Integer.parseInt(args[0]);
+                if (t < 1) {
+                    System.out.println("Invalid arguments");
+                    System.out.println("t should be >= 1");
+                    printUsage();
+                    System.exit(1);
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid arguments");
+                printUsage();
                 System.exit(1);
             }
         } else {
             System.out.println("Invalid arguments");
+            printUsage();
             System.exit(1);
         }
 

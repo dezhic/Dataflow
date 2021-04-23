@@ -5,7 +5,6 @@ public class ArrayChannel implements Channel {
     volatile int beg = 0;
     volatile int end = beg;
     final int DEFAULT_BOUND = 8;
-    Actor dest;
 
     public ArrayChannel() {
         buffer = new int[DEFAULT_BOUND];
@@ -23,17 +22,10 @@ public class ArrayChannel implements Channel {
         return beg == end;
     }
 
-    /*
-        synchronization is needed, because multiple senders can cause
-        the buffer to be full.
-     */
     public synchronized boolean isFull() {
         return (end + 1) % buffer.length == beg;
     }
 
-    /* send should be synchronized because it might be called by
-        more than one senders.
-     */
     public synchronized void send(int data) {
         if (isFull()) {
             throw new BufferOverflowException();
@@ -43,9 +35,6 @@ public class ArrayChannel implements Channel {
         notify();
     }
 
-    /* receive is not synchronized because there's only
-        one receiver (that modifies `beg`) */
-    /* NO!!!! There can be multiple THREADS executing the same actor!!! */
     public synchronized int receive() {
         while (isEmpty()) {
             try {
@@ -58,10 +47,7 @@ public class ArrayChannel implements Channel {
         beg = (beg + 1) % buffer.length;
         return buffer[idx];
     }
-    public int peek() {
+    public synchronized int peek() {
         return buffer[beg];
-    }
-    public void setDest(Actor dest) {
-        this.dest = dest;
     }
 }
