@@ -57,6 +57,18 @@ network. Intuitively, this approach could be more efficient in the following sit
 Since my network does not have these properties, the silly implementation currently in your hand should 
 be a better choice.
 ## Run Test
+### Hardware Overview
+
+Model Name:	MacBook Air  
+Model Identifier:	MacBookAir9,1  
+Processor Name:	Quad-Core Intel Core i5  
+Processor Speed:	1.1 GHz  
+Number of Processors:	1  
+Total Number of Cores:	4  
+L2 Cache (per Core):	512 KB  
+L3 Cache:	6 MB  
+Hyper-Threading Technology:	Enabled  
+
 ```
 % java Simulation 1 <data.txt >/dev/null
 Elapsed time: 2509
