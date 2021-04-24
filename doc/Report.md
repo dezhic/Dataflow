@@ -1,7 +1,7 @@
 # Report
 ## Dataflow Network Design
-This is a reusable network. Please see [DataflowNetwork.pdf](./DataflowNetwork.pdf) 
-for the full design, or check out [DataflowNetwork_annotated.pdf](./DataflowNetwork_annotated.pdf) 
+This is a reusable network. Please see [DataflowNetwork.pdf](DataflowNetwork.pdf) 
+for the full design, or check out [DataflowNetwork_annotated.pdf](DataflowNetwork_annotated.pdf) 
 for more detailed explanations.
 
 Here, I'd like to mention a few points:
@@ -251,11 +251,127 @@ matter in terms of performance test.</sup>
 </tbody>
 </table>
 
-![Speedup Graph](./speedup.svg)
+![Speedup Graph](Speedup.svg)
 
-Further increase of nThreads would be meaningless, as my machine only has 4 cores 
+A maximum speedup of _1.319x_ is observed when running with 4 threads on my 4-core machine.
+
+Further increase of nThreads beyond 8 would be meaningless, as my machine only has 4 cores 
 (with Hyper-Threading enabled). So, it's expected that increasing nThreads will not cause performance 
 improvement but only add up overhead. As specified in the assignment sheet, I did start 
-a test with 41 threads, where 41 is the number of actors in my network, before I started 
-making the graph above a few minutes ago, and it's still running now... (I'm terminating it!)
+a test with 41 (no. of actors) threads, before I started making the graph above a few minutes ago, 
+and it's still running now... (I'm terminating it.)
 
+There's only _a little bit_ speedup simulating my dataflow network with multiple threads. This is 
+because this dataflow network is essentially mostly sequential. As you can see in the graph
+[DataflowNetwork.pdf](DataflowNetwork.pdf), only in a few cases are there multiple actors ready to fire.
+Therefore, the speedup is subtle for this network.
+
+---
+If you try out networks with higher degrees of parallelism _(an example is provided in the code as comment)_, you can 
+observe a more obvious speedup.
+
+Example:
+![A Highly Parallel Network](HighParaNet.svg)
+
+Test:
+```
+% cat data2.txt
+10
+% java Simulation <nThreads> <data2.txt >/dev/null
+```
+<table>
+<thead>
+  <tr>
+    <th>nThreads</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Run 1</td>
+    <td>1514</td>
+    <td>889</td>
+    <td>631</td>
+    <td>582</td>
+    <td>557</td>
+    <td>595</td>
+    <td>618</td>
+    <td>645</td>
+  </tr>
+  <tr>
+    <td>Run 2</td>
+    <td>1521</td>
+    <td>858</td>
+    <td>677</td>
+    <td>579</td>
+    <td>554</td>
+    <td>598</td>
+    <td>617</td>
+    <td>612</td>
+  </tr>
+  <tr>
+    <td>Run 3</td>
+    <td>1494</td>
+    <td>872</td>
+    <td>640</td>
+    <td>582</td>
+    <td>575</td>
+    <td>582</td>
+    <td>630</td>
+    <td>634</td>
+  </tr>
+  <tr>
+    <td>Run 4</td>
+    <td>1490</td>
+    <td>865</td>
+    <td>630</td>
+    <td>582</td>
+    <td>553</td>
+    <td>581</td>
+    <td>603</td>
+    <td>626</td>
+  </tr>
+  <tr>
+    <td>Run 5</td>
+    <td>1485</td>
+    <td>883</td>
+    <td>635</td>
+    <td>581</td>
+    <td>574</td>
+    <td>584</td>
+    <td>606</td>
+    <td>623</td>
+  </tr>
+  <tr>
+    <td>Average (ms)</td>
+    <td>1501</td>
+    <td>873</td>
+    <td>643</td>
+    <td>581</td>
+    <td>563</td>
+    <td>588</td>
+    <td>615</td>
+    <td>628</td>
+  </tr>
+  <tr>
+    <td>Speedup</td>
+    <td>1.000</td>
+    <td>1.718</td>
+    <td>2.336</td>
+    <td>2.582</td>
+    <td>2.668</td>
+    <td>2.552</td>
+    <td>2.441</td>
+    <td>2.390</td>
+  </tr>
+</tbody>
+</table>
+
+![HighPara Speedup](HighParaNetSpeedup.svg)
