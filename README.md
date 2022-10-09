@@ -1,7 +1,7 @@
 # Report
 ## Dataflow Network Design
-This is a reusable network. Please see [DataflowNetwork.pdf](DataflowNetwork.pdf) 
-for the full design, or check out [DataflowNetwork_annotated.pdf](DataflowNetwork_annotated.pdf) 
+This is a reusable network. Please see [DataflowNetwork.pdf](./doc/DataflowNetwork.pdf) 
+for the full design, or check out [DataflowNetwork_annotated.pdf](./doc/DataflowNetwork_annotated.pdf) 
 for more detailed explanations.
 
 Here, I'd like to mention a few points:
@@ -263,7 +263,7 @@ matter in terms of performance test.</sup>
 </tbody>
 </table>
 
-![Speedup Graph](Speedup.svg)
+![Speedup Graph](./doc/Speedup.svg)
 
 A maximum speedup of _1.319x_ is observed when running with 4 threads on my 4-core machine.
 
@@ -275,7 +275,7 @@ and it's still running now... (I'm terminating it.)
 
 There's only _a little bit_ speedup simulating my dataflow network with multiple threads. This is 
 because this dataflow network is essentially mostly sequential. As you can see in the graph
-[DataflowNetwork.pdf](DataflowNetwork.pdf), only in a few cases are there multiple actors ready to fire.
+[DataflowNetwork.pdf](./doc/DataflowNetwork.pdf), only in a few cases are there multiple actors ready to fire.
 Therefore, the speedup is subtle for this network.
 
 ---
@@ -283,7 +283,7 @@ If you try out networks with higher degrees of parallelism _(an example is provi
 observe a more obvious speedup.
 
 Example:
-![A Highly Parallel Network](HighParaNet.svg)
+![A Highly Parallel Network](./doc/HighParaNet.svg)
 
 Test:
 ```
@@ -386,4 +386,4 @@ Test:
 </tbody>
 </table>
 
-![HighPara Speedup](HighParaNetSpeedup.svg)
+![HighPara Speedup](./doc/HighParaNetSpeedup.svg)
